@@ -124,7 +124,10 @@ export default function TecnologiaSection() {
           <Reveal key={item.title} delay={index * 0.12}>
             <button
               className="techCard"
-              onClick={() => openModel(item)}
+              onClick={() => {
+                setActiveItem(null);
+                setIsLoadingModel(false);
+              }}
             >
               <h3>{item.title}</h3>
 

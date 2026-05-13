@@ -1,7 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import {
   OrbitControls,
-  Environment,
   useGLTF,
 } from "@react-three/drei";
 import { Suspense } from "react";
@@ -24,7 +23,7 @@ export default function ModelViewer({ path, scale, position }) {
     <div className="modelViewer">
       <Canvas
         frameloop="demand"
-        dpr={[1, 1.1]}
+        dpr={1}
         gl={{
           antialias: false,
           powerPreference: "high-performance",
@@ -40,7 +39,7 @@ export default function ModelViewer({ path, scale, position }) {
 
         <Suspense fallback={null}>
           <Model path={path} scale={scale} position={position} />
-          <Environment preset="studio" resolution={16} />
+         
         </Suspense>
 
         <OrbitControls
