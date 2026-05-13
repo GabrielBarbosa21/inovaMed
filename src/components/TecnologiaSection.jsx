@@ -138,7 +138,13 @@ export default function TecnologiaSection() {
               <Suspense
                 fallback={
                   <div className="loading3d">
-                    Carregando modelo 3D...
+                    <div className="loaderRing" />
+
+                    <h3>Carregando modelo 3D</h3>
+
+                    <p>
+                      Aguarde alguns segundos enquanto o componente é preparado.
+                    </p>
                   </div>
                 }
               >
