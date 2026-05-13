@@ -83,6 +83,16 @@ function preloadModels() {
 
 export default function TecnologiaSection() {
   const [activeItem, setActiveItem] = useState(null);
+  const [isLoadingModel, setIsLoadingModel] = useState(false);
+
+  function openModel(item) {
+    setIsLoadingModel(true);
+    setActiveItem(item);
+
+    setTimeout(() => {
+      setIsLoadingModel(false);
+    }, 1500);
+  }
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -114,7 +124,7 @@ export default function TecnologiaSection() {
           <Reveal key={item.title} delay={index * 0.12}>
             <button
               className="techCard"
-              onClick={() => setActiveItem(item)}
+              onClick={() => openModel(item)}
             >
               <h3>{item.title}</h3>
 
@@ -135,25 +145,37 @@ export default function TecnologiaSection() {
             </button>
 
             <div className="componentModelBox">
-              <Suspense
-                fallback={
-                  <div className="loading3d">
-                    <div className="loaderRing" />
+              {isLoadingModel ? (
+                <div className="loading3d">
+                  <div className="loaderRing" />
 
-                    <h3>Carregando modelo 3D</h3>
+                  <h3>Carregando modelo 3D</h3>
 
-                    <p>
-                      Aguarde alguns segundos enquanto o componente é preparado.
-                    </p>
-                  </div>
-                }
-              >
-                <ModelViewer
-                  path={activeItem.model}
-                  scale={activeItem.scale}
-                  position={activeItem.position}
-                />
-              </Suspense>
+                  <p>
+                    Aguarde alguns segundos enquanto o componente é preparado.
+                  </p>
+                </div>
+              ) : (
+                <Suspense
+                  fallback={
+                    <div className="loading3d">
+                      <div className="loaderRing" />
+
+                      <h3>Carregando modelo 3D</h3>
+
+                      <p>
+                        Aguarde alguns segundos enquanto o componente é preparado.
+                      </p>
+                    </div>
+                  }
+                >
+                  <ModelViewer
+                    path={activeItem.model}
+                    scale={activeItem.scale}
+                    position={activeItem.position}
+                  />
+                </Suspense>
+              )}
             </div>
 
             <div className="componentInfo">
