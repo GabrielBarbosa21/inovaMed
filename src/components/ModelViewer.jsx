@@ -56,3 +56,7 @@ export default function ModelViewer({ path, scale, position }) {
     </div>
   );
 }
+useGLTF.preload("/models/espelho.glb");
+useGLTF.preload("/models/balanca.glb");
+useGLTF.preload("/models/sensores.glb");
+useGLTF.preload("/models/higienizacao.glb");

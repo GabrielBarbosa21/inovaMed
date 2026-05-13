@@ -1,4 +1,10 @@
-import { useState, lazy, Suspense } from "react";
+import {
+  useState,
+  lazy,
+  Suspense,
+  useEffect,
+} from "react";
+
 import Cabine3D from "./Cabine3D";
 import { X } from "lucide-react";
 import Reveal from "./Reveal";
@@ -20,6 +26,7 @@ const items = [
       "Encaminhamento dos dados ao médico",
     ],
   },
+
   {
     title: "Balança digital",
     model: "/models/balanca.glb",
@@ -34,6 +41,7 @@ const items = [
       "Integração com o sistema",
     ],
   },
+
   {
     title: "Sensores vitais",
     model: "/models/sensores.glb",
@@ -48,6 +56,7 @@ const items = [
       "Coleta de dados em tempo real",
     ],
   },
+
   {
     title: "Sistema de higienização",
     model: "/models/higienizacao.glb",
@@ -64,14 +73,32 @@ const items = [
   },
 ];
 
+function preloadModels() {
+  items.forEach((item) => {
+    if (item.model) {
+      fetch(item.model);
+    }
+  });
+}
+
 export default function TecnologiaSection() {
   const [activeItem, setActiveItem] = useState(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      preloadModels();
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <section id="tecnologia" className="tecnologiaSection">
       <Reveal className="techHeader">
         <span className="sectionTag">Tecnologia</span>
+
         <h2>Cabine inteligente em 3D</h2>
+
         <p>
           Interaja com o modelo 3D da cabine e clique nos cards para visualizar
           o modelo do componente e suas especificações técnicas.
@@ -85,8 +112,12 @@ export default function TecnologiaSection() {
       <div className="techCards">
         {items.map((item, index) => (
           <Reveal key={item.title} delay={index * 0.12}>
-            <button className="techCard" onClick={() => setActiveItem(item)}>
+            <button
+              className="techCard"
+              onClick={() => setActiveItem(item)}
+            >
               <h3>{item.title}</h3>
+
               <p>Ver modelo 3D e especificações</p>
             </button>
           </Reveal>
@@ -96,7 +127,10 @@ export default function TecnologiaSection() {
       {activeItem && (
         <div className="specOverlay">
           <div className="specModal componentModal">
-            <button className="closeSpec" onClick={() => setActiveItem(null)}>
+            <button
+              className="closeSpec"
+              onClick={() => setActiveItem(null)}
+            >
               <X size={20} />
             </button>
 
@@ -118,6 +152,7 @@ export default function TecnologiaSection() {
 
             <div className="componentInfo">
               <h3>{activeItem.title}</h3>
+
               <p>{activeItem.description}</p>
 
               <ul>
