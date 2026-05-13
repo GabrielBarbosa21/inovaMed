@@ -91,7 +91,7 @@ export default function TecnologiaSection() {
 
     setTimeout(() => {
       setIsLoadingModel(false);
-    }, 1500);
+    }, 2000);
   }
 
   useEffect(() => {
