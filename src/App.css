@@ -2,8 +2,13 @@
 
 
 * {
+  will-change: auto;
+}
+
+* {
   box-sizing: border-box;
 }
+
 
 html {
   scroll-behavior: smooth;
@@ -34,7 +39,7 @@ body {
   align-items: center;
   justify-content: space-between;
   background: rgba(15, 23, 40, 0.72);
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(6px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -170,7 +175,7 @@ body {
 .primaryButton {
   color: #0f1728;
   background: #8ee3ee;
-  box-shadow: 0 18px 40px rgba(85, 199, 214, 0.28);
+  box-shadow: 0 10px 30px rgba(85, 199, 214, 0.28);
 }
 
 .secondaryButton {
@@ -999,4 +1004,8 @@ body {
   place-items: center;
   color: #8ee3ee;
   font-weight: 800;
+}
+
+html {
+  scroll-behavior: smooth;
 }
