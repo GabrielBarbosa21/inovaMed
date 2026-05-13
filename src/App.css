@@ -990,3 +990,13 @@ body {
     height: 340px;
   }
 }
+
+
+.loading3d {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: #8ee3ee;
+  font-weight: 800;
+}

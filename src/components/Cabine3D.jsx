@@ -3,9 +3,7 @@ import {
   OrbitControls,
   Environment,
   useGLTF,
-  Preload,
 } from "@react-three/drei";
-
 import { Suspense } from "react";
 
 function Model() {
@@ -25,9 +23,10 @@ export default function Cabine3D() {
   return (
     <div className="cabine3dCanvas">
       <Canvas
-        dpr={[1, 1.5]}
+        frameloop="demand"
+        dpr={[1, 1.1]}
         gl={{
-          antialias: true,
+          antialias: false,
           powerPreference: "high-performance",
         }}
         camera={{
@@ -35,27 +34,13 @@ export default function Cabine3D() {
           fov: 35,
         }}
       >
-        <ambientLight intensity={1.4} />
-
-        <directionalLight
-          position={[4, 5, 4]}
-          intensity={2}
-        />
-
-        <directionalLight
-          position={[-4, 2, -3]}
-          intensity={0.7}
-        />
+        <ambientLight intensity={1.5} />
+        <directionalLight position={[4, 5, 4]} intensity={1.8} />
+        <directionalLight position={[-4, 2, -3]} intensity={0.6} />
 
         <Suspense fallback={null}>
           <Model />
-
-          <Environment
-            preset="city"
-            resolution={128}
-          />
-
-          <Preload all />
+          <Environment preset="studio" resolution={16} />
         </Suspense>
 
         <OrbitControls

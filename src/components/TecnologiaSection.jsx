@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import Cabine3D from "./Cabine3D";
-import ModelViewer from "./ModelViewer";
 import { X } from "lucide-react";
 import Reveal from "./Reveal";
+
+const ModelViewer = lazy(() => import("./ModelViewer"));
 
 const items = [
   {
     title: "Espelho medicinal touch",
     model: "/models/espelho.glb",
+    scale: 1.6,
+    position: [0, 0, 0],
     description:
       "Interface interativa para perguntas clínicas, coleta de informações e orientação do paciente durante a triagem.",
     specs: [
@@ -20,6 +23,8 @@ const items = [
   {
     title: "Balança digital",
     model: "/models/balanca.glb",
+    scale: 1.6,
+    position: [0, 0, 0],
     description:
       "Sistema integrado para medir o peso corporal automaticamente durante o atendimento.",
     specs: [
@@ -32,6 +37,8 @@ const items = [
   {
     title: "Sensores vitais",
     model: "/models/sensores.glb",
+    scale: 1.6,
+    position: [0, 0, 0],
     description:
       "Sensores responsáveis pela coleta inicial dos sinais vitais do paciente.",
     specs: [
@@ -44,6 +51,8 @@ const items = [
   {
     title: "Sistema de higienização",
     model: "/models/higienizacao.glb",
+    scale: 1.6,
+    position: [0, 0, 0],
     description:
       "Estrutura pensada para segurança, limpeza e uso contínuo em ambientes hospitalares.",
     specs: [
@@ -92,18 +101,19 @@ export default function TecnologiaSection() {
             </button>
 
             <div className="componentModelBox">
-              {activeItem.model ? (
+              <Suspense
+                fallback={
+                  <div className="loading3d">
+                    Carregando modelo 3D...
+                  </div>
+                }
+              >
                 <ModelViewer
                   path={activeItem.model}
-                  scale={1.6}
-                  position={[0, -0, 0]}
+                  scale={activeItem.scale}
+                  position={activeItem.position}
                 />
-              ) : (
-                <div className="modelPlaceholder">
-                  <h3>Modelo 3D em desenvolvimento</h3>
-                  <p>Este componente será adicionado em breve.</p>
-                </div>
-              )}
+              </Suspense>
             </div>
 
             <div className="componentInfo">
