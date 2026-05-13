@@ -1,6 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import {
   OrbitControls,
+  Environment,
   useGLTF,
 } from "@react-three/drei";
 import { Suspense } from "react";
@@ -39,6 +40,7 @@ export default function Cabine3D() {
 
         <Suspense fallback={null}>
           <Model />
+          <Environment preset="studio" resolution={16} />
         </Suspense>
 
         <OrbitControls
