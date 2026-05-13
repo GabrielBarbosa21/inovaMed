@@ -1,5 +1,11 @@
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Environment, useGLTF } from "@react-three/drei";
+import {
+  OrbitControls,
+  Environment,
+  useGLTF,
+  Preload,
+} from "@react-three/drei";
+
 import { Suspense } from "react";
 
 function Model() {
@@ -18,19 +24,46 @@ function Model() {
 export default function Cabine3D() {
   return (
     <div className="cabine3dCanvas">
-      <Canvas camera={{ position: [0, 1.1, 6], fov: 35 }}>
-        <ambientLight intensity={1.6} />
-        <directionalLight position={[4, 5, 4]} intensity={2.4} />
-        <directionalLight position={[-4, 2, -3]} intensity={0.9} />
+      <Canvas
+        dpr={[1, 1.5]}
+        gl={{
+          antialias: true,
+          powerPreference: "high-performance",
+        }}
+        camera={{
+          position: [0, 1.1, 6],
+          fov: 35,
+        }}
+      >
+        <ambientLight intensity={1.4} />
+
+        <directionalLight
+          position={[4, 5, 4]}
+          intensity={2}
+        />
+
+        <directionalLight
+          position={[-4, 2, -3]}
+          intensity={0.7}
+        />
 
         <Suspense fallback={null}>
           <Model />
-          <Environment preset="city" />
+
+          <Environment
+            preset="city"
+            resolution={128}
+          />
+
+          <Preload all />
         </Suspense>
 
         <OrbitControls
           enableZoom={true}
           enablePan={false}
+          enableDamping={true}
+          dampingFactor={0.05}
+          autoRotate={false}
           minDistance={4}
           maxDistance={8}
         />
